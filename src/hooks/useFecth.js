@@ -10,7 +10,7 @@ export function useFetch(fetchFn, initialValue) {
     async function fetchData() {
       setIsFetching(true);
       try {
-        const data = await fetchFn(); // 경우에 맞는 fetch함수 불러와서 사용
+        const data = await fetchFn(); // 컴포넌트별 사용되는 fetch함수 불러와서 사용
         setFetchedData(data);
       } catch (error) {
         setError({ message: error.message || "Failed to fetch data." });
@@ -20,7 +20,7 @@ export function useFetch(fetchFn, initialValue) {
     }
 
     fetchData();
-  }, [fetchFn]); // 의존성으로 fetch함수 입력
+  }, [fetchFn, setFetchedData]); // 의존성으로 fetch함수 입력
 
   return {
     isFetching,
